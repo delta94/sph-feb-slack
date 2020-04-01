@@ -11,18 +11,31 @@ import Login from './Auth/Login';
 import Register from './Auth/Register';
 
 class RootRouter extends React.Component {
+  
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      isLoading: true
+    }
+  }
+
   componentDidMount(){
-    console.log(this.props.isLoading)
     firebase.auth().onAuthStateChanged(user => {
+      console.log(user)
       if (user) {
         this.props.setUser(user)
+        this.setState({ isLoading: false });
         this.props.history.push('/');
+      }else {
+        this.props.history.push('/register');
+        this.setState({ isLoading: false });
       }
     })
   }
   
   render() {
-    return this.props.isLoading ? <Spinner /> : (
+    return this.state.isLoading ? <Spinner /> : (
       <Switch>
         <Route exact path="/" component={App} />
         <Route path="/login" component={Login} />
