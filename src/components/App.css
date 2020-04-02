@@ -9,7 +9,7 @@ body,
 /* Messages */
 
 .messages {
-  height: 440px;
+  height: 66vh;
   overflow-y: scroll;
 }
 
@@ -25,4 +25,14 @@ body,
 .message__self {
   border-left: 2px solid orange;
   padding-left: 8px ;
+}
+
+.message__image {
+  padding: 1em;
+}
+
+
+/* Progress Bar */
+.progress__bar {
+  margin: 0.3rem 0 0 0 !important;
 }
