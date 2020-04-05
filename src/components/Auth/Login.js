@@ -23,7 +23,6 @@ class Login extends React.Component {
     });
   }
 
-
   isFormValid = () => {
     const { email, password } = this.state;
 

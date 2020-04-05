@@ -3,7 +3,7 @@ import firebase from 'firebase';
 import { connect } from 'react-redux';
 import { Switch, Route, withRouter } from 'react-router-dom';
 
-import { setUser } from '../actions';
+import { setUser, clearUser } from '../actions';
 //Components
 import App from './App';
 import Spinner from './Spinner';
@@ -22,7 +22,6 @@ class RootRouter extends React.Component {
 
   componentDidMount(){
     firebase.auth().onAuthStateChanged(user => {
-      console.log(user)
       if (user) {
         this.props.setUser(user)
         this.setState({ isLoading: false });
@@ -49,6 +48,12 @@ const mapStateFromProps = state => ({
   isLoading: state.user.isLoading
 }); 
 
-const RootWithAuth = withRouter(connect(mapStateFromProps , { setUser })(RootRouter));
+const RootWithAuth = withRouter(
+  connect(
+    mapStateFromProps,
+    { setUser, clearUser }
+  )
+  (RootRouter)
+);
 
 export default RootWithAuth;

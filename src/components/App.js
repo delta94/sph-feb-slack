@@ -1,6 +1,37 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { Grid } from 'semantic-ui-react';
 
-function App() {
-  return <h2>Slack Clone</h2>;
-}
-export default App;
+//Components
+import ColorPanel from './ColorPanel/ColorPanel';
+import SidePanel from './SidePanel/SidePanel';
+import Messages from './Messages/Messages';
+import MetaPanel from './MetaPanel/MetaPanel';
+
+const App = ({ currentUser, currentChannel }) => (
+  <Grid columns="equal" className="app" style={{ background: "#eee" }}>
+    <ColorPanel />
+    <SidePanel 
+      key={currentUser ?? currentChannel.uid}
+      currentUser={currentUser}
+    />
+
+    <Grid.Column style={{ marginLeft: 320 }}>
+      <Messages 
+        currentChannel={currentChannel}
+        currentUser={currentUser}
+      />
+    </Grid.Column>
+
+    <Grid.Column width={4}>
+      <MetaPanel />
+    </Grid.Column>
+  </Grid>
+)
+
+const mapStateFromProps = ({ user, channel }) => ({
+  currentUser: user.currentUser,
+  currentChannel: channel.currentChannel
+});
+
+export default connect(mapStateFromProps)(App);

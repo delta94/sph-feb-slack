@@ -5,3 +5,24 @@ body,
   background: #eee;
   padding: 1em;
 }
+
+/* Messages */
+
+.messages {
+  height: 440px;
+  overflow-y: scroll;
+}
+
+.message__form {
+  bottom: 1em;
+  margin-top: 30px !important;
+  left: 0;
+  right: 1em;
+  z-index: 200;
+}
+
+/* message.js */
+.message__self {
+  border-left: 2px solid orange;
+  padding-left: 8px ;
+}
